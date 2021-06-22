@@ -2,4 +2,4 @@ flask
 tensorflow-cpu
 opencv-python
 numpy
-gunicron
+gunicorn
