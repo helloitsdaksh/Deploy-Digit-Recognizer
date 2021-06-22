@@ -18,8 +18,3 @@ def predict():
 	print ("debug")	
 	
 	return jsonify({"result" : init()})
-
-
-
-if __name__ == "__main__":
-    app.run(debug = True)
