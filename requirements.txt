@@ -1,5 +1,4 @@
 flask
-base64
 tensorflow-cpu
 opencv-python
 numpy
