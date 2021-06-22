@@ -1,15 +1,7 @@
 from flask import Flask,jsonify,request
-from flask_restful import Api, Resource
-import base64, re
-import tensorflow as tf
-import cv2
-import sys
-import numpy as np
+import base64
 from main import *
 app = Flask(__name__)
-
-model = tf.keras.models.load_model("Deploy-Digit-Recognizer/ model.h5")
-
 
 def convertImage(imgData1):
 	with open('Deploy-Digit-Recognizer/images/output.jpg','wb') as output:
