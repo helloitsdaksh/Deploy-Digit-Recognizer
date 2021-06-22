@@ -1,18 +1,19 @@
 from flask import Flask,jsonify,request
 from flask_restful import Api, Resource
 import base64, re
-import imageio
 import tensorflow as tf
-
+import cv2
+import sys
+import numpy as np
+from main import *
 app = Flask(__name__)
+
+model = tf.keras.models.load_model("Deploy-Digit-Recognizer/ model.h5")
 
 
 def convertImage(imgData1):
-	imgstr = re.search(r'base64,(.*)',imgData1).group(1)
-	#print(imgstr)
-	with open('output.png','wb') as output:
-		output.write(imgstr.decode('base64'))
-
+	with open('Deploy-Digit-Recognizer/images/output.jpg','wb') as output:
+		output.write(base64.b64decode(imgData1["base64"]))
 
 @app.route('/')
 def index():
@@ -20,11 +21,11 @@ def index():
 
 @app.route('/predict/',methods=['GET','POST'])
 def predict():
-	imgData = request.get_data()
+	imgData = request.get_json()
 	convertImage(imgData)
-	print ("debug")
-	# x = imread('output.png')
-	return
+	print ("debug")	
+	
+	return jsonify({"result" : init()})
 
 
 
