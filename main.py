@@ -4,7 +4,7 @@ from keras.models import load_model
 def init():
     model = load_model("model.h5")
     # print ("debug")
-    image_path = "Deploy-Digit-Recognizer/images/output.jpg"
+    image_path = "output.jpg"
     image = Image.open(image_path)
     image = image.resize((28,28))
     image = image.convert(mode="L")
