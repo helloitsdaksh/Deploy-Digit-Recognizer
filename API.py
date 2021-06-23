@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask,jsonify,request
 import base64
 from tensorflow.keras.models import load_model
 from cv2 import *
@@ -19,6 +19,8 @@ def index():
 @app.route('/predict/',methods=['GET','POST'])
 def predict():
 	print("debug")
+	image_data = request.get_json()
+	convertImage(image_data)
 	image_path = "Deploy-Digit-Recognizer/images/output.jpg"
 	img_array = cv2.imread(image_path)
 	new_array = cv2.cvtColor(img_array, cv2.COLOR_BGR2GRAY)
