@@ -1,8 +1,7 @@
 from flask import Flask,jsonify,request
 import base64
 from tensorflow.keras.models import load_model
-import numpy as np
-from PIL import Image
+from main import *
 
 
 app = Flask(__name__)
@@ -21,18 +20,7 @@ def predict():
     print("debug")
     image_data = request.get_json()
     convertImage(image_data)
-    image_path = "output.jpg"
-    image = Image.open(image_path)
-    image = image.resize((28,28))
-    image = image.convert(mode="L")
-    print(image.mode)
-    image_array = np.array(image)
-    image_array= np.invert(image_array)
-    print(image_array.shape) 
-    image_array = image_array.reshape(1,28,28,1)
-    y_pred = np.argmax(model.predict(image_array), axis=-1)
-    y_pred =  y_pred.tolist()
-    return jsonify({"result" : y_pred})
+    return jsonify({"result" : init()})
 
 if __name__ == "__main__":
 	app.run()
