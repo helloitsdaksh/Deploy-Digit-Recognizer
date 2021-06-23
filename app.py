@@ -3,13 +3,14 @@ import base64
 from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
+import os
 
 
 app = Flask(__name__)
 
-model = load_model("Deploy-Digit-Recognizer/ model.h5")
+model = load_model("./Deploy-Digit-Recognizer/ model.h5")
 def convertImage(imgData1):
-	with open('Deploy-Digit-Recognizer/images/output.jpg','wb') as output:
+	with open('./Deploy-Digit-Recognizer/images/output.jpg','wb') as output:
 		output.write(base64.b64decode(imgData1["base64"]))
 
 @app.route('/')
@@ -21,7 +22,7 @@ def predict():
     print("debug")
     image_data = request.get_json()
     convertImage(image_data)
-    image_path = "Deploy-Digit-Recognizer/images/output.jpg"
+    image_path = "./Deploy-Digit-Recognizer/images/output.jpg"
     image = Image.open(image_path)
     image = image.resize((28,28))
     image = image.convert(mode="L")
