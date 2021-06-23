@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 model = load_model("model.h5")
 def convertImage(imgData1):
-	with open('/images/output.jpg','wb') as output:
+	with open('images/output.jpg','wb') as output:
 		output.write(base64.b64decode(imgData1["base64"]))
 
 @app.route('/')
@@ -21,7 +21,7 @@ def predict():
     print("debug")
     image_data = request.get_json()
     convertImage(image_data)
-    image_path = "/images/output.jpg"
+    image_path = "images/output.jpg"
     image = Image.open(image_path)
     image = image.resize((28,28))
     image = image.convert(mode="L")
