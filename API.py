@@ -1,7 +1,7 @@
 from flask import Flask,jsonify
 import base64
 from keras.models import load_model
-import cv2
+from cv2 import *
 import numpy as np
 
 model = load_model("Deploy-Digit-Recognizer/ model.h5")
