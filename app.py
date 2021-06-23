@@ -1,8 +1,8 @@
 from flask import Flask,jsonify,request
 import base64
 from tensorflow.keras.models import load_model
-import cv2
 import numpy as np
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -18,19 +18,21 @@ def index():
 
 @app.route('/predict/',methods=['GET','POST'])
 def predict():
-	print("debug")
-	image_data = request.get_json()
-	convertImage(image_data)
-	image_path = "Deploy-Digit-Recognizer/images/output.jpg"
-	img_array = cv2.imread(image_path)
-	new_array = cv2.cvtColor(img_array, cv2.COLOR_BGR2GRAY)
-	new_array = np.invert(new_array)
-	new_array = cv2.resize(new_array, (28,28))
-	new_array = new_array.reshape(1,28,28,1)
-	y_pred = np.argmax(model.predict(new_array), axis=-1)
-	print(y_pred)
-	y_pred= y_pred.tolist()	
-	return jsonify({"result" : y_pred})
+    print("debug")
+    image_data = request.get_json()
+    convertImage(image_data)
+    image_path = "Deploy-Digit-Recognizer/images/output.jpg"
+    image = Image.open(image_path)
+    image = image.resize((28,28))
+    image = image.convert(mode="L")
+    print(image.mode)
+    image_array = np.array(image)
+    image_array= np.invert(image_array)
+    print(image_array.shape) 
+    image_array = image_array.reshape(1,28,28,1)
+    y_pred = np.argmax(model.predict(image_array), axis=-1)
+    y_pred =  y_pred.tolist()
+    return jsonify({"result" : y_pred})
 
 if __name__ == "__main__":
 	app.run()
