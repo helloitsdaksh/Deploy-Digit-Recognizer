@@ -2,4 +2,4 @@ flask
 keras
 opencv-python
 numpy
-gunicorns
+gunicorn
