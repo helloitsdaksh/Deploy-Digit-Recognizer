@@ -1,11 +1,13 @@
 from flask import Flask,jsonify
 import base64
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from cv2 import *
 import numpy as np
 
-model = load_model("Deploy-Digit-Recognizer/ model.h5")
+
 app = Flask(__name__)
+
+model = load_model("Deploy-Digit-Recognizer/ model.h5")
 def convertImage(imgData1):
 	with open('Deploy-Digit-Recognizer/images/output.jpg','wb') as output:
 		output.write(base64.b64decode(imgData1["base64"]))
@@ -29,5 +31,5 @@ def predict():
 	return jsonify({"result" : y_pred})
 
 if __name__ == "__main__":
-	app.run(debug = True)
+	app.run(port= 5000, debug = True)
 	
