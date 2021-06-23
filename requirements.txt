@@ -1,5 +1,5 @@
 flask
-tensorflow.keras
+tensorflow-cpu
 opencv-python
-numpy
+numpy==1.19.2
 gunicorn
