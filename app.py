@@ -16,7 +16,7 @@ def convertImage(imgData1):
 def index():
     return jsonify({"Inputs" : "base64code"})
 
-@app.route('/predict/',methods=['GET','POST'])
+@app.route('/predict/',methods=['POST'])
 def predict():
     print("debug")
     image_data = request.get_json()
