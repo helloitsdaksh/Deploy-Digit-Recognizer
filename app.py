@@ -1,7 +1,7 @@
 from flask import Flask,jsonify,request
 import base64
 from tensorflow.keras.models import load_model
-from cv2 import *
+import cv2
 import numpy as np
 
 
