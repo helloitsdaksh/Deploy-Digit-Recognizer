@@ -1,5 +1,5 @@
 flask
-keras
+tensorflow
 opencv-python
 numpy
 gunicorn
