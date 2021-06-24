@@ -8,9 +8,10 @@ app = Flask(__name__)
 
 model = load_model("model.h5")
 def convertImage(imgData1):
-	with open("output.jpg",'wb') as output:
-		output.write(base64.b64decode(imgData1["base64"]))
-        print(imgData1)
+    print(imgData1)
+    with open("output.jpg",'wb') as output:
+        output.write(base64.b64decode(imgData1["base64"]))
+        
 
 @app.route('/')
 def index():
@@ -20,7 +21,7 @@ def index():
 def predict():
     print("debug")
     image_data = request.get_json()
-    print(image_data)
+    print(f"debugging the api{image_data}")
     convertImage(image_data)
     
     return jsonify({"result" : init()})
