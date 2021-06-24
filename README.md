@@ -11,3 +11,5 @@
     2. {
           "base64" : "base64 encoded image String"
        }
+## This Module is also deployed on to heroku 
+- follow the link : https://digit-recoginition.herokuapp.com/
